@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="88e4f964455f4cf1806d858c0247e461" Name="Diagram1">
+        <EntityTypeShape EntityType="RESTAURANTEModel.CARTA" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RESTAURANTEModel.CATEGORIA" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RESTAURANTEModel.DETALLE_DE_PEDIDO" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RESTAURANTEModel.ENCARGADO" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RESTAURANTEModel.INGREDIENTE" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RESTAURANTEModel.MEDIDA" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="RESTAURANTEModel.NIVEL_DE_DIFICULTAD" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RESTAURANTEModel.PEDIDO_DE_VENTA" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RESTAURANTEModel.PLATO" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="RESTAURANTEModel.RECETA" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RESTAURANTEModel.RESTAURANTE" Width="1.5" PointX="9.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="RESTAURANTEModel.FK_CARTA_PLATO" ManuallyRouted="false" />
+        <AssociationConnector Association="RESTAURANTEModel.FK_CARTA_RESTAURANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="RESTAURANTEModel.FK_RESTAURANTE_CARTA" ManuallyRouted="false" />
+        <AssociationConnector Association="RESTAURANTEModel.FK_CATEGORIA_ENCARGADO" ManuallyRouted="false" />
+        <AssociationConnector Association="RESTAURANTEModel.FK_PLATO_CATEGORIA" ManuallyRouted="false" />
+        <AssociationConnector Association="RESTAURANTEModel.FK_PEDIDO_DE__VENTA_DETALLE_DE_PEDIDO" ManuallyRouted="false" />
+        <AssociationConnector Association="RESTAURANTEModel.FK_RECETA_INGREDIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="RESTAURANTEModel.FK_RECETA_MEDIDA" ManuallyRouted="false" />
+        <AssociationConnector Association="RESTAURANTEModel.FK_PLATO_NIVEL_DE__DIFICULTAD" ManuallyRouted="false" />
+        <AssociationConnector Association="RESTAURANTEModel.FK_RESTAURANTE_PEDIDO_DE_VENTA" ManuallyRouted="false" />
+        <AssociationConnector Association="RESTAURANTEModel.FK_PLATO_RECETA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RESTAURANTEModelStoreContainer" CdmEntityContainer="RESTAURANTEEntities">
+    <EntitySetMapping Name="CARTA">
+      <EntityTypeMapping TypeName="RESTAURANTEModel.CARTA">
+        <MappingFragment StoreEntitySet="CARTA">
+          <ScalarProperty Name="ID_CARTA" ColumnName="ID_CARTA" />
+          <ScalarProperty Name="ID_RESTAURANTE" ColumnName="ID_RESTAURANTE" />
+          <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CATEGORIA">
+      <EntityTypeMapping TypeName="RESTAURANTEModel.CATEGORIA">
+        <MappingFragment StoreEntitySet="CATEGORIA">
+          <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+          <ScalarProperty Name="ID_ENCARGADO" ColumnName="ID_ENCARGADO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETALLE_DE_PEDIDO">
+      <EntityTypeMapping TypeName="RESTAURANTEModel.DETALLE_DE_PEDIDO">
+        <MappingFragment StoreEntitySet="DETALLE DE PEDIDO">
+          <ScalarProperty Name="ID_DETALLE_DE_PEDIDO__ID_DETALLEDEPEDIDO" ColumnName="ID_DETALLE DE PEDIDO&#xD;&#xA;ID_DETALLEDEPEDIDO" />
+          <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
+          <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ENCARGADO">
+      <EntityTypeMapping TypeName="RESTAURANTEModel.ENCARGADO">
+        <MappingFragment StoreEntitySet="ENCARGADO">
+          <ScalarProperty Name="ID_ENCARGADO" ColumnName="ID_ENCARGADO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+          <ScalarProperty Name="EDAD" ColumnName="EDAD" />
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INGREDIENTE">
+      <EntityTypeMapping TypeName="RESTAURANTEModel.INGREDIENTE">
+        <MappingFragment StoreEntitySet="INGREDIENTE">
+          <ScalarProperty Name="ID_INGREDIENTE" ColumnName="ID_INGREDIENTE" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="PRECIO_COMPRA" ColumnName="PRECIO COMPRA" />
+          <ScalarProperty Name="STOCK_ALMACEN" ColumnName="STOCK ALMACEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MEDIDA">
+      <EntityTypeMapping TypeName="RESTAURANTEModel.MEDIDA">
+        <MappingFragment StoreEntitySet="MEDIDA">
+          <ScalarProperty Name="ID_MEDIDA" ColumnName="ID_MEDIDA" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NIVEL_DE_DIFICULTAD">
+      <EntityTypeMapping TypeName="RESTAURANTEModel.NIVEL_DE_DIFICULTAD">
+        <MappingFragment StoreEntitySet="NIVEL DE DIFICULTAD">
+          <ScalarProperty Name="ID_DIFICULTAD" ColumnName="ID_DIFICULTAD" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PEDIDO_DE_VENTA">
+      <EntityTypeMapping TypeName="RESTAURANTEModel.PEDIDO_DE_VENTA">
+        <MappingFragment StoreEntitySet="PEDIDO DE VENTA">
+          <ScalarProperty Name="ID_PEDIDO" ColumnName="ID_PEDIDO" />
+          <ScalarProperty Name="ID_DETALLEPEDIDO" ColumnName="ID_DETALLEPEDIDO" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="MONTOFINAL" ColumnName="MONTOFINAL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PLATO">
+      <EntityTypeMapping TypeName="RESTAURANTEModel.PLATO">
+        <MappingFragment StoreEntitySet="PLATO">
+          <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
+          <ScalarProperty Name="ID_NDEDIDIFICULTAD" ColumnName="ID_NDEDIDIFICULTAD" />
+          <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+          <ScalarProperty Name="ID_RECETA" ColumnName="ID_RECETA" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RECETA">
+      <EntityTypeMapping TypeName="RESTAURANTEModel.RECETA">
+        <MappingFragment StoreEntitySet="RECETA">
+          <ScalarProperty Name="ID_RECETA" ColumnName="ID_RECETA" />
+          <ScalarProperty Name="ID_INGREDIENTE" ColumnName="ID_INGREDIENTE" />
+          <ScalarProperty Name="ID_MEDIDA" ColumnName="ID_MEDIDA" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESTAURANTE">
+      <EntityTypeMapping TypeName="RESTAURANTEModel.RESTAURANTE">
+        <MappingFragment StoreEntitySet="RESTAURANTE">
+          <ScalarProperty Name="ID_RESTAURANTE" ColumnName="ID_RESTAURANTE" />
+          <ScalarProperty Name="ID_CARTA" ColumnName="ID_CARTA" />
+          <ScalarProperty Name="ID_PEDIDO" ColumnName="ID_PEDIDO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

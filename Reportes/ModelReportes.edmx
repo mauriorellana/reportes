@@ -1,0 +1,796 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RESTAURANTEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CARTA">
+          <Key>
+            <PropertyRef Name="ID_CARTA" />
+          </Key>
+          <Property Name="ID_CARTA" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID_RESTAURANTE" Type="nchar" MaxLength="10" />
+          <Property Name="ID_PLATO" Type="nchar" MaxLength="10" />
+          <Property Name="DESCRIPCION" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="ID_CATEGORIA" />
+          </Key>
+          <Property Name="ID_CATEGORIA" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID_ENCARGADO" Type="nchar" MaxLength="10" />
+          <Property Name="DESCRIPCION" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DETALLE DE PEDIDO">
+          <Key>
+            <PropertyRef Name="ID_DETALLE DE PEDIDO&#xD;&#xA;ID_DETALLEDEPEDIDO" />
+          </Key>
+          <Property Name="ID_DETALLE DE PEDIDO&#xD;&#xA;ID_DETALLEDEPEDIDO" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID_PLATO" Type="nchar" MaxLength="20" />
+          <Property Name="SUBTOTAL" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CANTIDAD" Type="int" />
+        </EntityType>
+        <EntityType Name="ENCARGADO">
+          <Key>
+            <PropertyRef Name="ID_ENCARGADO" />
+          </Key>
+          <Property Name="ID_ENCARGADO" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NOMBRE" Type="ntext" />
+          <Property Name="APELLIDOS" Type="ntext" />
+          <Property Name="EDAD" Type="int" />
+          <Property Name="DNI" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DIRECCION" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="INGREDIENTE">
+          <Key>
+            <PropertyRef Name="ID_INGREDIENTE" />
+          </Key>
+          <Property Name="ID_INGREDIENTE" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NOMBRE" Type="nchar" MaxLength="30" />
+          <Property Name="PRECIO COMPRA" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="STOCK ALMACEN" Type="int" />
+        </EntityType>
+        <EntityType Name="MEDIDA">
+          <Key>
+            <PropertyRef Name="ID_MEDIDA" />
+          </Key>
+          <Property Name="ID_MEDIDA" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="NIVEL DE DIFICULTAD">
+          <Key>
+            <PropertyRef Name="ID_DIFICULTAD" />
+          </Key>
+          <Property Name="ID_DIFICULTAD" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="PEDIDO DE VENTA">
+          <Key>
+            <PropertyRef Name="ID_PEDIDO" />
+          </Key>
+          <Property Name="ID_PEDIDO" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID_DETALLEPEDIDO" Type="nchar" MaxLength="10" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="MONTOFINAL" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="PLATO">
+          <Key>
+            <PropertyRef Name="ID_PLATO" />
+          </Key>
+          <Property Name="ID_PLATO" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID_NDEDIDIFICULTAD" Type="nchar" MaxLength="10" />
+          <Property Name="ID_CATEGORIA" Type="nchar" MaxLength="10" />
+          <Property Name="ID_RECETA" Type="nchar" MaxLength="10" />
+          <Property Name="NOMBRE" Type="nchar" MaxLength="30" />
+          <Property Name="DESCRIPCION" Type="nchar" MaxLength="50" />
+          <Property Name="PRECIO" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="RECETA">
+          <Key>
+            <PropertyRef Name="ID_RECETA" />
+          </Key>
+          <Property Name="ID_RECETA" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID_INGREDIENTE" Type="nchar" MaxLength="10" />
+          <Property Name="ID_MEDIDA" Type="nchar" MaxLength="10" />
+          <Property Name="DESCRIPCION" Type="nchar" MaxLength="50" />
+          <Property Name="CANTIDAD" Type="int" />
+        </EntityType>
+        <EntityType Name="RESTAURANTE">
+          <Key>
+            <PropertyRef Name="ID_RESTAURANTE" />
+          </Key>
+          <Property Name="ID_RESTAURANTE" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID_CARTA" Type="nchar" MaxLength="10" />
+          <Property Name="ID_PEDIDO" Type="nchar" MaxLength="10" />
+          <Property Name="NOMBRE" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UBICACION" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_CARTA_PLATO">
+          <End Role="PLATO" Type="Self.PLATO" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CARTA" Type="Self.CARTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLATO">
+              <PropertyRef Name="ID_PLATO" />
+            </Principal>
+            <Dependent Role="CARTA">
+              <PropertyRef Name="ID_PLATO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARTA_RESTAURANTE">
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CARTA" Type="Self.CARTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURANTE">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Principal>
+            <Dependent Role="CARTA">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORIA_ENCARGADO">
+          <End Role="ENCARGADO" Type="Self.ENCARGADO" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ENCARGADO">
+              <PropertyRef Name="ID_ENCARGADO" />
+            </Principal>
+            <Dependent Role="CATEGORIA">
+              <PropertyRef Name="ID_ENCARGADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PEDIDO DE&#xD;&#xA;VENTA_DETALLE DE PEDIDO">
+          <End Role="DETALLE DE PEDIDO" Type="Self.DETALLE DE PEDIDO" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PEDIDO DE VENTA" Type="Self.PEDIDO DE VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE DE PEDIDO">
+              <PropertyRef Name="ID_DETALLE DE PEDIDO&#xD;&#xA;ID_DETALLEDEPEDIDO" />
+            </Principal>
+            <Dependent Role="PEDIDO DE VENTA">
+              <PropertyRef Name="ID_DETALLEPEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLATO_CATEGORIA">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PLATO" Type="Self.PLATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Principal>
+            <Dependent Role="PLATO">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLATO_NIVEL DE&#xD;&#xA;DIFICULTAD">
+          <End Role="NIVEL DE DIFICULTAD" Type="Self.NIVEL DE DIFICULTAD" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PLATO" Type="Self.PLATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NIVEL DE DIFICULTAD">
+              <PropertyRef Name="ID_DIFICULTAD" />
+            </Principal>
+            <Dependent Role="PLATO">
+              <PropertyRef Name="ID_NDEDIDIFICULTAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLATO_RECETA">
+          <End Role="RECETA" Type="Self.RECETA" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PLATO" Type="Self.PLATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECETA">
+              <PropertyRef Name="ID_RECETA" />
+            </Principal>
+            <Dependent Role="PLATO">
+              <PropertyRef Name="ID_RECETA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECETA_INGREDIENTE">
+          <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RECETA" Type="Self.RECETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INGREDIENTE">
+              <PropertyRef Name="ID_INGREDIENTE" />
+            </Principal>
+            <Dependent Role="RECETA">
+              <PropertyRef Name="ID_INGREDIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECETA_MEDIDA">
+          <End Role="MEDIDA" Type="Self.MEDIDA" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RECETA" Type="Self.RECETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEDIDA">
+              <PropertyRef Name="ID_MEDIDA" />
+            </Principal>
+            <Dependent Role="RECETA">
+              <PropertyRef Name="ID_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESTAURANTE_CARTA">
+          <End Role="CARTA" Type="Self.CARTA" Multiplicity="0..1" />
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARTA">
+              <PropertyRef Name="ID_CARTA" />
+            </Principal>
+            <Dependent Role="RESTAURANTE">
+              <PropertyRef Name="ID_CARTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESTAURANTE_PEDIDO DE VENTA">
+          <End Role="PEDIDO DE VENTA" Type="Self.PEDIDO DE VENTA" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEDIDO DE VENTA">
+              <PropertyRef Name="ID_PEDIDO" />
+            </Principal>
+            <Dependent Role="RESTAURANTE">
+              <PropertyRef Name="ID_PEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RESTAURANTEModelStoreContainer">
+          <EntitySet Name="CARTA" EntityType="Self.CARTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE DE PEDIDO" EntityType="Self.DETALLE DE PEDIDO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ENCARGADO" EntityType="Self.ENCARGADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INGREDIENTE" EntityType="Self.INGREDIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEDIDA" EntityType="Self.MEDIDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NIVEL DE DIFICULTAD" EntityType="Self.NIVEL DE DIFICULTAD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PEDIDO DE VENTA" EntityType="Self.PEDIDO DE VENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLATO" EntityType="Self.PLATO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RECETA" EntityType="Self.RECETA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESTAURANTE" EntityType="Self.RESTAURANTE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CARTA_PLATO" Association="Self.FK_CARTA_PLATO">
+            <End Role="PLATO" EntitySet="PLATO" />
+            <End Role="CARTA" EntitySet="CARTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARTA_RESTAURANTE" Association="Self.FK_CARTA_RESTAURANTE">
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+            <End Role="CARTA" EntitySet="CARTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORIA_ENCARGADO" Association="Self.FK_CATEGORIA_ENCARGADO">
+            <End Role="ENCARGADO" EntitySet="ENCARGADO" />
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PEDIDO DE&#xD;&#xA;VENTA_DETALLE DE PEDIDO" Association="Self.FK_PEDIDO DE&#xD;&#xA;VENTA_DETALLE DE PEDIDO">
+            <End Role="DETALLE DE PEDIDO" EntitySet="DETALLE DE PEDIDO" />
+            <End Role="PEDIDO DE VENTA" EntitySet="PEDIDO DE VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLATO_CATEGORIA" Association="Self.FK_PLATO_CATEGORIA">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PLATO" EntitySet="PLATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLATO_NIVEL DE&#xD;&#xA;DIFICULTAD" Association="Self.FK_PLATO_NIVEL DE&#xD;&#xA;DIFICULTAD">
+            <End Role="NIVEL DE DIFICULTAD" EntitySet="NIVEL DE DIFICULTAD" />
+            <End Role="PLATO" EntitySet="PLATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLATO_RECETA" Association="Self.FK_PLATO_RECETA">
+            <End Role="RECETA" EntitySet="RECETA" />
+            <End Role="PLATO" EntitySet="PLATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECETA_INGREDIENTE" Association="Self.FK_RECETA_INGREDIENTE">
+            <End Role="INGREDIENTE" EntitySet="INGREDIENTE" />
+            <End Role="RECETA" EntitySet="RECETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECETA_MEDIDA" Association="Self.FK_RECETA_MEDIDA">
+            <End Role="MEDIDA" EntitySet="MEDIDA" />
+            <End Role="RECETA" EntitySet="RECETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESTAURANTE_CARTA" Association="Self.FK_RESTAURANTE_CARTA">
+            <End Role="CARTA" EntitySet="CARTA" />
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESTAURANTE_PEDIDO DE VENTA" Association="Self.FK_RESTAURANTE_PEDIDO DE VENTA">
+            <End Role="PEDIDO DE VENTA" EntitySet="PEDIDO DE VENTA" />
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RESTAURANTEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CARTA">
+          <Key>
+            <PropertyRef Name="ID_CARTA" />
+          </Key>
+          <Property Name="ID_CARTA" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID_RESTAURANTE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ID_PLATO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="PLATO" Relationship="Self.FK_CARTA_PLATO" FromRole="CARTA" ToRole="PLATO" />
+          <NavigationProperty Name="RESTAURANTE" Relationship="Self.FK_CARTA_RESTAURANTE" FromRole="CARTA" ToRole="RESTAURANTE" />
+          <NavigationProperty Name="RESTAURANTE1" Relationship="Self.FK_RESTAURANTE_CARTA" FromRole="CARTA" ToRole="RESTAURANTE" />
+        </EntityType>
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="ID_CATEGORIA" />
+          </Key>
+          <Property Name="ID_CATEGORIA" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID_ENCARGADO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ENCARGADO" Relationship="Self.FK_CATEGORIA_ENCARGADO" FromRole="CATEGORIA" ToRole="ENCARGADO" />
+          <NavigationProperty Name="PLATO" Relationship="Self.FK_PLATO_CATEGORIA" FromRole="CATEGORIA" ToRole="PLATO" />
+        </EntityType>
+        <EntityType Name="DETALLE_DE_PEDIDO">
+          <Key>
+            <PropertyRef Name="ID_DETALLE_DE_PEDIDO__ID_DETALLEDEPEDIDO" />
+          </Key>
+          <Property Name="ID_DETALLE_DE_PEDIDO__ID_DETALLEDEPEDIDO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID_PLATO" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="SUBTOTAL" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <NavigationProperty Name="PEDIDO_DE_VENTA" Relationship="Self.FK_PEDIDO_DE__VENTA_DETALLE_DE_PEDIDO" FromRole="DETALLE_DE_PEDIDO" ToRole="PEDIDO_DE_VENTA" />
+        </EntityType>
+        <EntityType Name="ENCARGADO">
+          <Key>
+            <PropertyRef Name="ID_ENCARGADO" />
+          </Key>
+          <Property Name="ID_ENCARGADO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EDAD" Type="Int32" />
+          <Property Name="DNI" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DIRECCION" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK_CATEGORIA_ENCARGADO" FromRole="ENCARGADO" ToRole="CATEGORIA" />
+        </EntityType>
+        <EntityType Name="INGREDIENTE">
+          <Key>
+            <PropertyRef Name="ID_INGREDIENTE" />
+          </Key>
+          <Property Name="ID_INGREDIENTE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="PRECIO_COMPRA" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="STOCK_ALMACEN" Type="Int32" />
+          <NavigationProperty Name="RECETA" Relationship="Self.FK_RECETA_INGREDIENTE" FromRole="INGREDIENTE" ToRole="RECETA" />
+        </EntityType>
+        <EntityType Name="MEDIDA">
+          <Key>
+            <PropertyRef Name="ID_MEDIDA" />
+          </Key>
+          <Property Name="ID_MEDIDA" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="RECETA" Relationship="Self.FK_RECETA_MEDIDA" FromRole="MEDIDA" ToRole="RECETA" />
+        </EntityType>
+        <EntityType Name="NIVEL_DE_DIFICULTAD">
+          <Key>
+            <PropertyRef Name="ID_DIFICULTAD" />
+          </Key>
+          <Property Name="ID_DIFICULTAD" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="PLATO" Relationship="Self.FK_PLATO_NIVEL_DE__DIFICULTAD" FromRole="NIVEL_DE_DIFICULTAD" ToRole="PLATO" />
+        </EntityType>
+        <EntityType Name="PEDIDO_DE_VENTA">
+          <Key>
+            <PropertyRef Name="ID_PEDIDO" />
+          </Key>
+          <Property Name="ID_PEDIDO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID_DETALLEPEDIDO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FECHA" Type="DateTime" Precision="0" />
+          <Property Name="MONTOFINAL" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="DETALLE_DE_PEDIDO" Relationship="Self.FK_PEDIDO_DE__VENTA_DETALLE_DE_PEDIDO" FromRole="PEDIDO_DE_VENTA" ToRole="DETALLE_DE_PEDIDO" />
+          <NavigationProperty Name="RESTAURANTE" Relationship="Self.FK_RESTAURANTE_PEDIDO_DE_VENTA" FromRole="PEDIDO_DE_VENTA" ToRole="RESTAURANTE" />
+        </EntityType>
+        <EntityType Name="PLATO">
+          <Key>
+            <PropertyRef Name="ID_PLATO" />
+          </Key>
+          <Property Name="ID_PLATO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID_NDEDIDIFICULTAD" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ID_CATEGORIA" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ID_RECETA" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="PRECIO" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="CARTA" Relationship="Self.FK_CARTA_PLATO" FromRole="PLATO" ToRole="CARTA" />
+          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK_PLATO_CATEGORIA" FromRole="PLATO" ToRole="CATEGORIA" />
+          <NavigationProperty Name="NIVEL_DE_DIFICULTAD" Relationship="Self.FK_PLATO_NIVEL_DE__DIFICULTAD" FromRole="PLATO" ToRole="NIVEL_DE_DIFICULTAD" />
+          <NavigationProperty Name="RECETA" Relationship="Self.FK_PLATO_RECETA" FromRole="PLATO" ToRole="RECETA" />
+        </EntityType>
+        <EntityType Name="RECETA">
+          <Key>
+            <PropertyRef Name="ID_RECETA" />
+          </Key>
+          <Property Name="ID_RECETA" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID_INGREDIENTE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ID_MEDIDA" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <NavigationProperty Name="INGREDIENTE" Relationship="Self.FK_RECETA_INGREDIENTE" FromRole="RECETA" ToRole="INGREDIENTE" />
+          <NavigationProperty Name="MEDIDA" Relationship="Self.FK_RECETA_MEDIDA" FromRole="RECETA" ToRole="MEDIDA" />
+          <NavigationProperty Name="PLATO" Relationship="Self.FK_PLATO_RECETA" FromRole="RECETA" ToRole="PLATO" />
+        </EntityType>
+        <EntityType Name="RESTAURANTE">
+          <Key>
+            <PropertyRef Name="ID_RESTAURANTE" />
+          </Key>
+          <Property Name="ID_RESTAURANTE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID_CARTA" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ID_PEDIDO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NOMBRE" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UBICACION" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CARTA" Relationship="Self.FK_CARTA_RESTAURANTE" FromRole="RESTAURANTE" ToRole="CARTA" />
+          <NavigationProperty Name="CARTA1" Relationship="Self.FK_RESTAURANTE_CARTA" FromRole="RESTAURANTE" ToRole="CARTA" />
+          <NavigationProperty Name="PEDIDO_DE_VENTA" Relationship="Self.FK_RESTAURANTE_PEDIDO_DE_VENTA" FromRole="RESTAURANTE" ToRole="PEDIDO_DE_VENTA" />
+        </EntityType>
+        <Association Name="FK_CARTA_PLATO">
+          <End Role="PLATO" Type="Self.PLATO" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CARTA" Type="Self.CARTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLATO">
+              <PropertyRef Name="ID_PLATO" />
+            </Principal>
+            <Dependent Role="CARTA">
+              <PropertyRef Name="ID_PLATO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARTA_RESTAURANTE">
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CARTA" Type="Self.CARTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURANTE">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Principal>
+            <Dependent Role="CARTA">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESTAURANTE_CARTA">
+          <End Role="CARTA" Type="Self.CARTA" Multiplicity="0..1" />
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARTA">
+              <PropertyRef Name="ID_CARTA" />
+            </Principal>
+            <Dependent Role="RESTAURANTE">
+              <PropertyRef Name="ID_CARTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORIA_ENCARGADO">
+          <End Role="ENCARGADO" Type="Self.ENCARGADO" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ENCARGADO">
+              <PropertyRef Name="ID_ENCARGADO" />
+            </Principal>
+            <Dependent Role="CATEGORIA">
+              <PropertyRef Name="ID_ENCARGADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLATO_CATEGORIA">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PLATO" Type="Self.PLATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Principal>
+            <Dependent Role="PLATO">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PEDIDO_DE__VENTA_DETALLE_DE_PEDIDO">
+          <End Role="DETALLE_DE_PEDIDO" Type="Self.DETALLE_DE_PEDIDO" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PEDIDO_DE_VENTA" Type="Self.PEDIDO_DE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_DE_PEDIDO">
+              <PropertyRef Name="ID_DETALLE_DE_PEDIDO__ID_DETALLEDEPEDIDO" />
+            </Principal>
+            <Dependent Role="PEDIDO_DE_VENTA">
+              <PropertyRef Name="ID_DETALLEPEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECETA_INGREDIENTE">
+          <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RECETA" Type="Self.RECETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INGREDIENTE">
+              <PropertyRef Name="ID_INGREDIENTE" />
+            </Principal>
+            <Dependent Role="RECETA">
+              <PropertyRef Name="ID_INGREDIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECETA_MEDIDA">
+          <End Role="MEDIDA" Type="Self.MEDIDA" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RECETA" Type="Self.RECETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEDIDA">
+              <PropertyRef Name="ID_MEDIDA" />
+            </Principal>
+            <Dependent Role="RECETA">
+              <PropertyRef Name="ID_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLATO_NIVEL_DE__DIFICULTAD">
+          <End Role="NIVEL_DE_DIFICULTAD" Type="Self.NIVEL_DE_DIFICULTAD" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PLATO" Type="Self.PLATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NIVEL_DE_DIFICULTAD">
+              <PropertyRef Name="ID_DIFICULTAD" />
+            </Principal>
+            <Dependent Role="PLATO">
+              <PropertyRef Name="ID_NDEDIDIFICULTAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESTAURANTE_PEDIDO_DE_VENTA">
+          <End Role="PEDIDO_DE_VENTA" Type="Self.PEDIDO_DE_VENTA" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEDIDO_DE_VENTA">
+              <PropertyRef Name="ID_PEDIDO" />
+            </Principal>
+            <Dependent Role="RESTAURANTE">
+              <PropertyRef Name="ID_PEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLATO_RECETA">
+          <End Role="RECETA" Type="Self.RECETA" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PLATO" Type="Self.PLATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECETA">
+              <PropertyRef Name="ID_RECETA" />
+            </Principal>
+            <Dependent Role="PLATO">
+              <PropertyRef Name="ID_RECETA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RESTAURANTEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CARTA" EntityType="Self.CARTA" />
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" />
+          <EntitySet Name="DETALLE_DE_PEDIDO" EntityType="Self.DETALLE_DE_PEDIDO" />
+          <EntitySet Name="ENCARGADO" EntityType="Self.ENCARGADO" />
+          <EntitySet Name="INGREDIENTE" EntityType="Self.INGREDIENTE" />
+          <EntitySet Name="MEDIDA" EntityType="Self.MEDIDA" />
+          <EntitySet Name="NIVEL_DE_DIFICULTAD" EntityType="Self.NIVEL_DE_DIFICULTAD" />
+          <EntitySet Name="PEDIDO_DE_VENTA" EntityType="Self.PEDIDO_DE_VENTA" />
+          <EntitySet Name="PLATO" EntityType="Self.PLATO" />
+          <EntitySet Name="RECETA" EntityType="Self.RECETA" />
+          <EntitySet Name="RESTAURANTE" EntityType="Self.RESTAURANTE" />
+          <AssociationSet Name="FK_CARTA_PLATO" Association="Self.FK_CARTA_PLATO">
+            <End Role="PLATO" EntitySet="PLATO" />
+            <End Role="CARTA" EntitySet="CARTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARTA_RESTAURANTE" Association="Self.FK_CARTA_RESTAURANTE">
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+            <End Role="CARTA" EntitySet="CARTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESTAURANTE_CARTA" Association="Self.FK_RESTAURANTE_CARTA">
+            <End Role="CARTA" EntitySet="CARTA" />
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORIA_ENCARGADO" Association="Self.FK_CATEGORIA_ENCARGADO">
+            <End Role="ENCARGADO" EntitySet="ENCARGADO" />
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLATO_CATEGORIA" Association="Self.FK_PLATO_CATEGORIA">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PLATO" EntitySet="PLATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PEDIDO_DE__VENTA_DETALLE_DE_PEDIDO" Association="Self.FK_PEDIDO_DE__VENTA_DETALLE_DE_PEDIDO">
+            <End Role="DETALLE_DE_PEDIDO" EntitySet="DETALLE_DE_PEDIDO" />
+            <End Role="PEDIDO_DE_VENTA" EntitySet="PEDIDO_DE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECETA_INGREDIENTE" Association="Self.FK_RECETA_INGREDIENTE">
+            <End Role="INGREDIENTE" EntitySet="INGREDIENTE" />
+            <End Role="RECETA" EntitySet="RECETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECETA_MEDIDA" Association="Self.FK_RECETA_MEDIDA">
+            <End Role="MEDIDA" EntitySet="MEDIDA" />
+            <End Role="RECETA" EntitySet="RECETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLATO_NIVEL_DE__DIFICULTAD" Association="Self.FK_PLATO_NIVEL_DE__DIFICULTAD">
+            <End Role="NIVEL_DE_DIFICULTAD" EntitySet="NIVEL_DE_DIFICULTAD" />
+            <End Role="PLATO" EntitySet="PLATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESTAURANTE_PEDIDO_DE_VENTA" Association="Self.FK_RESTAURANTE_PEDIDO_DE_VENTA">
+            <End Role="PEDIDO_DE_VENTA" EntitySet="PEDIDO_DE_VENTA" />
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLATO_RECETA" Association="Self.FK_PLATO_RECETA">
+            <End Role="RECETA" EntitySet="RECETA" />
+            <End Role="PLATO" EntitySet="PLATO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RESTAURANTEModelStoreContainer" CdmEntityContainer="RESTAURANTEEntities">
+          <EntitySetMapping Name="CARTA">
+            <EntityTypeMapping TypeName="RESTAURANTEModel.CARTA">
+              <MappingFragment StoreEntitySet="CARTA">
+                <ScalarProperty Name="ID_CARTA" ColumnName="ID_CARTA" />
+                <ScalarProperty Name="ID_RESTAURANTE" ColumnName="ID_RESTAURANTE" />
+                <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIA">
+            <EntityTypeMapping TypeName="RESTAURANTEModel.CATEGORIA">
+              <MappingFragment StoreEntitySet="CATEGORIA">
+                <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+                <ScalarProperty Name="ID_ENCARGADO" ColumnName="ID_ENCARGADO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_DE_PEDIDO">
+            <EntityTypeMapping TypeName="RESTAURANTEModel.DETALLE_DE_PEDIDO">
+              <MappingFragment StoreEntitySet="DETALLE DE PEDIDO">
+                <ScalarProperty Name="ID_DETALLE_DE_PEDIDO__ID_DETALLEDEPEDIDO" ColumnName="ID_DETALLE DE PEDIDO&#xD;&#xA;ID_DETALLEDEPEDIDO" />
+                <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
+                <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ENCARGADO">
+            <EntityTypeMapping TypeName="RESTAURANTEModel.ENCARGADO">
+              <MappingFragment StoreEntitySet="ENCARGADO">
+                <ScalarProperty Name="ID_ENCARGADO" ColumnName="ID_ENCARGADO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="EDAD" ColumnName="EDAD" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INGREDIENTE">
+            <EntityTypeMapping TypeName="RESTAURANTEModel.INGREDIENTE">
+              <MappingFragment StoreEntitySet="INGREDIENTE">
+                <ScalarProperty Name="ID_INGREDIENTE" ColumnName="ID_INGREDIENTE" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="PRECIO_COMPRA" ColumnName="PRECIO COMPRA" />
+                <ScalarProperty Name="STOCK_ALMACEN" ColumnName="STOCK ALMACEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEDIDA">
+            <EntityTypeMapping TypeName="RESTAURANTEModel.MEDIDA">
+              <MappingFragment StoreEntitySet="MEDIDA">
+                <ScalarProperty Name="ID_MEDIDA" ColumnName="ID_MEDIDA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NIVEL_DE_DIFICULTAD">
+            <EntityTypeMapping TypeName="RESTAURANTEModel.NIVEL_DE_DIFICULTAD">
+              <MappingFragment StoreEntitySet="NIVEL DE DIFICULTAD">
+                <ScalarProperty Name="ID_DIFICULTAD" ColumnName="ID_DIFICULTAD" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PEDIDO_DE_VENTA">
+            <EntityTypeMapping TypeName="RESTAURANTEModel.PEDIDO_DE_VENTA">
+              <MappingFragment StoreEntitySet="PEDIDO DE VENTA">
+                <ScalarProperty Name="ID_PEDIDO" ColumnName="ID_PEDIDO" />
+                <ScalarProperty Name="ID_DETALLEPEDIDO" ColumnName="ID_DETALLEPEDIDO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="MONTOFINAL" ColumnName="MONTOFINAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLATO">
+            <EntityTypeMapping TypeName="RESTAURANTEModel.PLATO">
+              <MappingFragment StoreEntitySet="PLATO">
+                <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
+                <ScalarProperty Name="ID_NDEDIDIFICULTAD" ColumnName="ID_NDEDIDIFICULTAD" />
+                <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+                <ScalarProperty Name="ID_RECETA" ColumnName="ID_RECETA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECETA">
+            <EntityTypeMapping TypeName="RESTAURANTEModel.RECETA">
+              <MappingFragment StoreEntitySet="RECETA">
+                <ScalarProperty Name="ID_RECETA" ColumnName="ID_RECETA" />
+                <ScalarProperty Name="ID_INGREDIENTE" ColumnName="ID_INGREDIENTE" />
+                <ScalarProperty Name="ID_MEDIDA" ColumnName="ID_MEDIDA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESTAURANTE">
+            <EntityTypeMapping TypeName="RESTAURANTEModel.RESTAURANTE">
+              <MappingFragment StoreEntitySet="RESTAURANTE">
+                <ScalarProperty Name="ID_RESTAURANTE" ColumnName="ID_RESTAURANTE" />
+                <ScalarProperty Name="ID_CARTA" ColumnName="ID_CARTA" />
+                <ScalarProperty Name="ID_PEDIDO" ColumnName="ID_PEDIDO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
